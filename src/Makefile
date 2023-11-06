@@ -43,7 +43,7 @@ CFLAGS+=-c -pedantic -Wall -Wshadow -Wformat -Wpointer-arith \
 	-I/usr/local/lib/ansi-include -std=c99 \
         $(CPPFLAGS) \
         $(OPTIMISE)
-	 
+
 CC=gcc
 LIBS=-lm
 
@@ -51,6 +51,11 @@ LIBS=-lm
 # Thanks to Erol Basturk for providing them.
 AIX_CFLAGS=-c -D_POSIX_SOURCE -D_XOPEN_SOURCE -D_ALL_SOURCE
 AIX_CC=xlc
+
+install : pgn-extract
+	cp pgn-extract $(HOME)/.local/bin/.
+	cp ../doc/man/pgn-extract.man $(HOME)/.local/share/man/man1/pgn-extract.1
+	cp pgn-extract ../.
 
 pgn-extract : $(OBJS)
 	$(CC) $(DEBUGINFO) $(ORIGCFLAGS) $(CPPFLAGS) $(LDFLAGS) $(OBJS) $(LIBS) -o pgn-extract
